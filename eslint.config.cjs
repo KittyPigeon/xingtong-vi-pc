@@ -1,6 +1,8 @@
 const js = require('@eslint/js');
 const vue = require('eslint-plugin-vue');
 const prettier = require('eslint-config-prettier');
+const ts = require('@typescript-eslint/eslint-plugin');
+const tsParser = require('@typescript-eslint/parser');
 
 module.exports = [
   {
@@ -17,7 +19,7 @@ module.exports = [
       'package-lock.json',
       'pnpm-lock.yaml',
       'eslint.config.cjs',
-      'vite.config.js',
+      'vite.config.ts',
     ],
   },
 
@@ -30,14 +32,67 @@ module.exports = [
   // 关闭与 Prettier 冲突的规则
   prettier,
 
+  // 解析 .vue 中的 TypeScript
+  {
+    files: ['**/*.vue'],
+    languageOptions: {
+      parser: require('vue-eslint-parser'),
+      parserOptions: {
+        parser: tsParser,
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        localStorage: 'readonly',
+      },
+    },
+    rules: {},
+  },
+
+  // TypeScript 支持
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        localStorage: 'readonly',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': ts,
+    },
+    rules: {
+      ...ts.configs.recommended.rules,
+    },
+  },
+
   // 项目定制
   {
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        localStorage: 'readonly',
+      },
     },
     rules: {
       'vue/multi-word-component-names': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
     },
   },
 ];

@@ -21,16 +21,17 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import { computed } from 'vue';
-  import { useStore } from 'vuex';
+  import { useAppStore } from '@/store';
 
-  const store = useStore();
-  const sidebarOpen = computed(() => store.state.sidebarOpen);
-  const toggleSidebar = () => store.commit('toggleSidebar');
+  const appStore = useAppStore();
+  const sidebarOpen = computed(() => appStore.sidebarOpen);
+
+  const toggleSidebar = () => appStore.toggleSidebar();
 </script>
 
-<style>
+<style scoped lang="scss">
   .layout {
     display: grid;
     grid-template: 'header' var(--header-height) 'content' 1fr / 1fr;
@@ -42,6 +43,7 @@
     display: flex;
     grid-area: header;
     gap: 12px;
+    width:200px;
     align-items: center;
     height: var(--header-height);
     padding: 0 16px;
@@ -92,10 +94,10 @@
     color: #333;
     text-decoration: none;
     border-radius: 8px;
-  }
 
-  .nav-item:hover {
-    background: #f1f1f3;
+    &:hover {
+      background: #f1f1f3;
+    }
   }
 
   /* Overlay when sidebar open on tablet */

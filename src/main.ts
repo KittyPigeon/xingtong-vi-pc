@@ -1,10 +1,18 @@
 import { createApp } from 'vue';
+import { createPinia } from 'pinia';
 import App from './App.vue';
-import store from './store';
-import './styles/responsive.css';
+import router from '@/router';
 import ElementPlus from 'element-plus';
+import '@/assets/styles/responsive.css';
+import '@/assets/styles/global.scss';
 import 'element-plus/dist/index.css';
-import router from './router';
-import './styles/global.scss';
+import { useThemeStore } from '@/store';
 
-createApp(App).use(store).use(ElementPlus).use(router).mount('#app');
+const app = createApp(App);
+const pinia = createPinia();
+
+app.use(pinia);
+useThemeStore().init();
+app.use(ElementPlus);
+app.use(router);
+app.mount('#app');

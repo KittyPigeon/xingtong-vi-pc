@@ -43,8 +43,8 @@
     display: flex;
     grid-area: header;
     gap: 12px;
-    width:200px;
     align-items: center;
+    width: 200px;
     height: var(--header-height);
     padding: 0 16px;
     background: #fff;

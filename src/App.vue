@@ -59,23 +59,26 @@
   .app-container {
     .toolbar {
       display: flex;
+      align-items: center;
       justify-content: flex-end;
       margin-bottom: 12px;
-      align-items: center;
+
       .divider {
         width: 12px;
       }
+
       .option {
         display: inline-flex;
-        align-items: center;
         gap: 8px;
+        align-items: center;
       }
+
       .swatch {
+        display: inline-block;
         width: 12px;
         height: 12px;
-        border-radius: 50%;
         border: 1px solid #e5e7eb;
-        display: inline-block;
+        border-radius: 50%;
       }
     }
 
@@ -95,13 +98,13 @@
       border-radius: 10px;
     }
 
-    @media (min-width: 768px) {
+    @media (width >= 768px) {
       .cards {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (min-width: 1024px) {
+    @media (width >= 1024px) {
       .cards {
         grid-template-columns: repeat(3, 1fr);
       }

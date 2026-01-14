@@ -10,6 +10,30 @@ const routes: RouteRecordRaw[] = [
       title: '仪表盘',
     },
   },
+  {
+    path: '/crypto-demo',
+    name: 'CryptoDemo',
+    component: () => import('@/views/CryptoDemoView.vue'),
+    meta: {
+      title: '加解密演示',
+    },
+  },
+  {
+    path: '/reports',
+    name: 'Reports',
+    component: () => import('@/views/ReportsView.vue'),
+    meta: {
+      title: '报表',
+    },
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: () => import('@/views/SettingsView.vue'),
+    meta: {
+      title: '设置',
+    },
+  },
   // 可以按需新增更多页面
   // {
   //   path: '/about',

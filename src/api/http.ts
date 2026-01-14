@@ -3,14 +3,26 @@ import axios, {
   type AxiosInstance,
   type AxiosResponse,
   type AxiosRequestHeaders,
+  type InternalAxiosRequestConfig,
 } from 'axios';
 import { ElMessage } from 'element-plus';
+import { encryptData, decryptData, type CryptoConfig } from '@/utils/crypto';
+
+declare const console: {
+  warn(...data: any[]): void;
+};
 
 interface AppResponse<T = unknown> {
   code: string | number;
   data: T;
   message?: string;
   msg?: string;
+}
+
+// 加密配置
+interface EncryptionConfig extends CryptoConfig {
+  encryptRequest?: boolean;
+  decryptResponse?: boolean;
 }
 
 interface HttpError extends Error {
@@ -26,20 +38,76 @@ const http: AxiosInstance = axios.create({
   timeout: 15000,
 });
 
+// 默认加密配置
+const defaultEncryptionConfig: EncryptionConfig = {
+  enableEncryption: import.meta.env.VITE_ENABLE_ENCRYPTION === 'true',
+  algorithm: (import.meta.env.VITE_CRYPTO_ALGORITHM as 'AES' | 'DES' | 'Rabbit' | 'RC4') || 'AES',
+  secretKey: import.meta.env.VITE_CRYPTO_SECRET_KEY || 'default-secret-key',
+  encryptRequest: true,
+  decryptResponse: true,
+};
+
 http.interceptors.request.use(
-  (config) => {
+  (config: InternalAxiosRequestConfig) => {
     const token = localStorage.getItem('token');
     if (token) {
       config.headers = config.headers || ({} as AxiosRequestHeaders);
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // 检查是否需要加密请求数据
+    const encryptionConfig: EncryptionConfig = {
+      ...defaultEncryptionConfig,
+      ...((config as any).encryptionConfig || {}),
+    };
+
+    // 如果启用了请求加密并且有数据需要加密
+    if (
+      encryptionConfig.enableEncryption &&
+      encryptionConfig.encryptRequest &&
+      config.data &&
+      Object.keys(config.data).length > 0
+    ) {
+      try {
+        config.data = {
+          encrypted: encryptData(config.data, encryptionConfig),
+        };
+      } catch (error) {
+        console.warn('Failed to encrypt request data:', error);
+      }
+    }
+
     return config;
   },
   (error) => Promise.reject(error)
 );
 
 function normalizeAppResponse(response: AxiosResponse): AppResponse {
-  const data = response.data as unknown as Record<string, unknown>;
+  let data = response.data as unknown as Record<string, unknown>;
+
+  // 检查是否需要解密响应数据
+  const config = response.config;
+  const encryptionConfig: EncryptionConfig = {
+    ...defaultEncryptionConfig,
+    ...((config as any).encryptionConfig || {}),
+  };
+
+  // 如果响应数据是加密的，则进行解密
+  if (
+    encryptionConfig.enableEncryption &&
+    encryptionConfig.decryptResponse &&
+    data &&
+    typeof data === 'object' &&
+    data.encrypted
+  ) {
+    try {
+      const decryptedData = decryptData(data.encrypted as string, encryptionConfig);
+      data = decryptedData as Record<string, unknown>;
+    } catch (error) {
+      console.warn('Failed to decrypt response data:', error);
+    }
+  }
+
   if (data && typeof data === 'object' && Object.prototype.hasOwnProperty.call(data, 'code')) {
     const successCodes = [0, 200, '0', '200', 'SUCCESS', 'OK'];
     const code = data.code as unknown as string | number;

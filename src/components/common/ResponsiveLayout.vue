@@ -7,9 +7,9 @@
 
     <aside class="sidebar" :class="{ open: sidebarOpen }">
       <nav class="nav">
-        <a class="nav-item" href="#">Dashboard</a>
-        <a class="nav-item" href="#">Reports</a>
-        <a class="nav-item" href="#">Settings</a>
+        <a class="nav-item" href="/">Dashboard</a>
+        <a class="nav-item" href="/reports">Reports</a>
+        <a class="nav-item" href="/settings">Settings</a>
       </nav>
     </aside>
 

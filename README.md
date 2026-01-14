@@ -22,4 +22,12 @@ node 22.5.1
 
 ## 代码规范的制定
 
+- eslint规范
+- prettier 规范
+- stylelint规范
+- commitlint规范
+- store代码规范
+- vite 代码规范
+-
+
 ##

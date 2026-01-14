@@ -90,7 +90,10 @@ module.exports = [
     },
     rules: {
       'vue/multi-word-component-names': 'off',
+      // 关闭 TypeScript 未使用变量的检查
       '@typescript-eslint/no-unused-vars': 'off',
+      // 关闭基础 JavaScript 未使用变量的检查（适用于 .js, .vue 等文件）
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',
     },

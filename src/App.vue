@@ -42,7 +42,7 @@
   import { ref } from 'vue';
   import { useI18nStore, useThemeStore } from '@/store';
   import type { Locale } from '@/locales';
-  import { ElSelect, ElOption } from 'element-plus';
+  // import { ElSelect, ElOption } from 'element-plus';
 
   const i18n = useI18nStore();
   const theme = useThemeStore();

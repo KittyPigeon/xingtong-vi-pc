@@ -31,12 +31,16 @@
         <div class="card">{{ i18n.t('common.modules.c') }}</div>
       </div>
       <div class="rect" :style="`background: ${theme.primaryColor}`"></div>
+      <InputNumber v-model="value1" input-id="integeronly" fluid />
+      33
     </div>
   </ResponsiveLayout>
 </template>
 
 <script setup lang="ts">
   import ResponsiveLayout from '@/components/common/ResponsiveLayout.vue';
+  import InputNumber from 'primevue/inputnumber';
+
   import { ref } from 'vue';
   import { useI18nStore, useThemeStore } from '@/store';
   import type { Locale } from '@/locales';
@@ -51,6 +55,8 @@
   function onThemeChange(val: string) {
     theme.setThemeByKey(val as any);
   }
+
+  const value1 = ref('1');
 </script>
 
 <style scoped lang="scss">

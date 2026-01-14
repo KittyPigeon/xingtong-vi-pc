@@ -2,12 +2,12 @@
   <ResponsiveLayout>
     <div class="app-container">
       <div class="toolbar">
-        <el-select v-model="lang" size="small" style="width: 140px" @change="onLangChange">
+        <!-- <el-select v-model="lang" size="small" style="width: 140px" @change="onLangChange">
           <el-option label="中文（简体）" value="zh-CN" />
           <el-option label="English" value="en" />
-        </el-select>
+        </el-select> -->
         <div class="divider"></div>
-        <el-select v-model="themeKey" size="small" style="width: 160px" @change="onThemeChange">
+        <!-- <el-select v-model="themeKey" size="small" style="width: 160px" @change="onThemeChange">
           <el-option
             v-for="item in theme.presets"
             :key="item.key"
@@ -19,7 +19,7 @@
               <span>{{ item.name }}</span>
             </span>
           </el-option>
-        </el-select>
+        </el-select> -->
       </div>
 
       <h2>{{ i18n.t('common.welcome') }}</h2>

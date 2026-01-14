@@ -10,14 +10,14 @@ const routes: RouteRecordRaw[] = [
       title: '仪表盘',
     },
   },
-  {
-    path: '/crypto-demo',
-    name: 'CryptoDemo',
-    component: () => import('@/views/CryptoDemoView.vue'),
-    meta: {
-      title: '加解密演示',
-    },
-  },
+  // {
+  //   path: '/crypto-demo',
+  //   name: 'CryptoDemo',
+  //   component: () => import('@/views/CryptoDemoView.vue'),
+  //   meta: {
+  //     title: '加解密演示',
+  //   },
+  // },
   {
     path: '/reports',
     name: 'Reports',

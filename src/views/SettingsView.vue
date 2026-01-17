@@ -1,14 +1,8 @@
 <template>
-  <div class="container">
-    <InputNumber v-model="value1" input-id="integeronly" fluid />
-    <SelectButton v-model="value" :options="options" />
-  </div>
+  <div class="container">设置</div>
 </template>
 
 <script setup>
-  import InputNumber from 'primevue/inputnumber';
-  import SelectButton from 'primevue/selectbutton';
-
   import { ref } from 'vue';
   const value1 = ref(1);
   const value = ref('New York');

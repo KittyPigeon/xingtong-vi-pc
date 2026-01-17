@@ -1,6 +1,6 @@
 <template>
   <div class="crypto-demo-view">
-    <el-page-header title="返回" content="API加解密功能演示" @back="$router.back()" />
+    <a-page-header title="返回" sub-title="API加解密功能演示" @back="$router.back()" />
 
     <div class="content">
       <CryptoDemo />
@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ElPageHeader } from 'element-plus';
+
   import CryptoDemo from '@/components/business/CryptoDemo.vue';
 </script>
 

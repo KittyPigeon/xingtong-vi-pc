@@ -4,55 +4,54 @@
 
     <div class="demo-section">
       <h3>数据加密</h3>
-      <el-input v-model="inputData" type="textarea" placeholder="请输入要加密的数据" :rows="4" />
+      <a-textarea v-model:value="inputData" placeholder="请输入要加密的数据" :rows="4" />
       <div class="actions">
-        <el-button type="primary" :loading="isEncrypting" @click="handleEncrypt">
+        <a-button type="primary" :loading="isEncrypting" @click="handleEncrypt">
           加密数据
-        </el-button>
-        <el-button @click="clearEncrypted">清空</el-button>
+        </a-button>
+        <a-button @click="clearEncrypted">清空</a-button>
       </div>
       <div v-if="encryptedData" class="result">
         <h4>加密结果：</h4>
-        <el-input v-model="encryptedData" type="textarea" :rows="3" readonly />
+        <a-textarea v-model:value="encryptedData" :rows="3" :readonly="true" />
       </div>
     </div>
 
     <div class="demo-section">
       <h3>数据解密</h3>
-      <el-input
-        v-model="encryptedInput"
-        type="textarea"
+      <a-textarea
+        v-model:value="encryptedInput"
         placeholder="请输入要解密的数据"
         :rows="4"
       />
       <div class="actions">
-        <el-button type="primary" :loading="isDecrypting" @click="handleDecrypt">
+        <a-button type="primary" :loading="isDecrypting" @click="handleDecrypt">
           解密数据
-        </el-button>
-        <el-button @click="clearDecrypted">清空</el-button>
+        </a-button>
+        <a-button @click="clearDecrypted">清空</a-button>
       </div>
       <div v-if="decryptedData" class="result">
         <h4>解密结果：</h4>
-        <el-input v-model="decryptedData" type="textarea" :rows="3" readonly />
+        <a-textarea v-model:value="decryptedData" :rows="3" :readonly="true" />
       </div>
     </div>
 
     <div class="demo-section">
       <h3>哈希计算</h3>
-      <el-input v-model="hashInput" placeholder="请输入要计算哈希的数据" />
+      <a-input v-model:value="hashInput" placeholder="请输入要计算哈希的数据" />
       <div class="actions">
-        <el-button @click="calculateSHA256">SHA256</el-button>
-        <el-button @click="calculateMD5">MD5</el-button>
-        <el-button @click="clearHash">清空</el-button>
+        <a-button @click="calculateSHA256">SHA256</a-button>
+        <a-button @click="calculateMD5">MD5</a-button>
+        <a-button @click="clearHash">清空</a-button>
       </div>
       <div v-if="hashResult" class="result">
         <h4>哈希结果：</h4>
-        <el-input v-model="hashResult" readonly />
+        <a-input v-model:value="hashResult" :readonly="true" />
       </div>
     </div>
 
     <div v-if="cryptoError" class="error">
-      <el-alert :title="cryptoError" type="error" show-icon closable @close="cryptoError = null" />
+      <a-alert :message="cryptoError" type="error" show-icon closable @close="cryptoError = null" />
     </div>
   </div>
 </template>
@@ -60,7 +59,7 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useCrypto } from '@/composables/useCrypto';
-  import { ElInput, ElButton, ElAlert } from 'element-plus';
+
 
   // 输入数据
   const inputData = ref<string>('');
@@ -188,7 +187,7 @@
       .actions {
         margin: 15px 0;
 
-        .el-button {
+        .ant-btn {
           margin-right: 10px;
         }
       }

@@ -5,7 +5,7 @@ import axios, {
   type AxiosRequestHeaders,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import { ElMessage } from 'element-plus';
+import { message } from 'ant-design-vue';
 import { encryptData, decryptData, type CryptoConfig } from '@/utils/crypto';
 
 declare const console: {
@@ -113,7 +113,7 @@ function normalizeAppResponse(response: AxiosResponse): AppResponse {
     const code = data.code as unknown as string | number;
     if (!successCodes.includes(code)) {
       const msg = (data.message as string) || (data.msg as string) || '请求失败';
-      ElMessage.error(msg);
+      message.error(msg);
       const err: HttpError = new Error(msg) as HttpError;
       err.name = 'AppError';
       err.code = code;
@@ -161,7 +161,7 @@ http.interceptors.response.use(
       if (status === 401) {
         localStorage.removeItem('token');
       }
-      ElMessage.error(msg);
+      message.error(msg);
       const err: HttpError = new Error(msg) as HttpError;
       err.name = 'HttpError';
       err.status = status;
@@ -170,20 +170,20 @@ http.interceptors.response.use(
       return Promise.reject(err);
     }
     if (anyErr && (anyErr.code === 'ECONNABORTED' || /timeout/i.test(anyErr.message))) {
-      ElMessage.error('请求超时');
+      message.error('请求超时');
       const err: HttpError = new Error('请求超时') as HttpError;
       err.name = 'TimeoutError';
       err.code = anyErr.code;
       return Promise.reject(err);
     }
     if (anyErr && /Network Error/i.test(anyErr.message)) {
-      ElMessage.error('网络错误');
+      message.error('网络错误');
       const err: HttpError = new Error('网络错误') as HttpError;
       err.name = 'NetworkError';
       err.code = anyErr.code;
       return Promise.reject(err);
     }
-    ElMessage.error('请求失败');
+    message.error('请求失败');
     return Promise.reject(anyErr);
   }
 );

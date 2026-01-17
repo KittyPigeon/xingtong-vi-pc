@@ -2,13 +2,18 @@
   <ResponsiveLayout>
     <div class="app-container">
       <div class="toolbar">
-        <el-select v-model="lang" size="small" style="width: 140px" @change="onLangChange">
-          <el-option label="中文（简体）" value="zh-CN" />
-          <el-option label="English" value="en" />
-        </el-select>
+        <a-select v-model:value="lang" size="small" style="width: 140px" @change="onLangChange">
+          <a-select-option label="中文（简体）" value="zh-CN" />
+          <a-select-option label="English" value="en" />
+        </a-select>
         <div class="divider"></div>
-        <el-select v-model="themeKey" size="small" style="width: 160px" @change="onThemeChange">
-          <el-option
+        <a-select
+          v-model:value="themeKey"
+          size="small"
+          style="width: 160px"
+          @change="onThemeChange"
+        >
+          <a-select-option
             v-for="item in theme.presets"
             :key="item.key"
             :label="item.name"
@@ -18,8 +23,8 @@
               <span class="swatch" :style="{ background: item.color }"></span>
               <span>{{ item.name }}</span>
             </span>
-          </el-option>
-        </el-select>
+          </a-select-option>
+        </a-select>
       </div>
 
       <h2>{{ i18n.t('common.welcome') }}</h2>
@@ -42,7 +47,6 @@
   import { ref } from 'vue';
   import { useI18nStore, useThemeStore } from '@/store';
   import type { Locale } from '@/locales';
-  // import { ElSelect, ElOption } from 'element-plus';
 
   const i18n = useI18nStore();
   const theme = useThemeStore();

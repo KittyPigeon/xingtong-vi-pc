@@ -26,12 +26,11 @@
     }
   },
   "dependencies": {
-    "@primeuix/themes": "^2.0.2",
     "@types/crypto-js": "^4.2.2",
+    "ant-design-vue": "^4.2.6",
     "axios": "^1.13.1",
     "crypto-js": "^4.2.0",
     "pinia": "^3.0.4",
-    "primevue": "^4.5.4",
     "vue": "^3.5.9",
     "vue-router": "^4.6.3",
     "vuex": "^4.1.0"

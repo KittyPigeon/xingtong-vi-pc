@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-
   import CryptoDemo from '@/components/business/CryptoDemo.vue';
 </script>
 

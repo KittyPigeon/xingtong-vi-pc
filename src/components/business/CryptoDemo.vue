@@ -19,11 +19,7 @@
 
     <div class="demo-section">
       <h3>数据解密</h3>
-      <a-textarea
-        v-model:value="encryptedInput"
-        placeholder="请输入要解密的数据"
-        :rows="4"
-      />
+      <a-textarea v-model:value="encryptedInput" placeholder="请输入要解密的数据" :rows="4" />
       <div class="actions">
         <a-button type="primary" :loading="isDecrypting" @click="handleDecrypt">
           解密数据
@@ -59,7 +55,6 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useCrypto } from '@/composables/useCrypto';
-
 
   // 输入数据
   const inputData = ref<string>('');

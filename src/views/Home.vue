@@ -83,6 +83,7 @@
         height: 12px;
         border: 1px solid #e5e7eb;
         border-radius: 50%;
+        padding:20px
       }
     }
 

@@ -1,23 +1,10 @@
 <template>
   <div class="layout">
-    <header class="header">
-      <button class="menu-btn hide-on-desktop" @click="toggleSidebar">☰</button>
-      <h1 class="title">Xintong Smarter PC</h1>
-    </header>
-
-    <aside class="sidebar" :class="{ open: sidebarOpen }">
-      <nav class="nav">
-        <a class="nav-item" href="/">Dashboard</a>
-        <a class="nav-item" href="/reports">Reports</a>
-        <a class="nav-item" href="/settings">Settings</a>
-      </nav>
-    </aside>
-
-    <div v-if="sidebarOpen" class="overlay" @click="toggleSidebar"></div>
-
+    <div class="header"></div>
     <main class="content">
       <slot />
     </main>
+    <footer class="footer"></footer>
   </div>
 </template>
 
@@ -44,7 +31,6 @@
     grid-area: header;
     gap: 12px;
     align-items: center;
-    width: 200px;
     height: var(--header-height);
     padding: 0 16px;
     background: #fff;
